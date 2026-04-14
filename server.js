@@ -1,5 +1,5 @@
 // .env file config
-require('dotenv').config({path: './.gitignore/.env'})
+require('dotenv').config({path: './.env'})
 
 //express
 const express = require('express');

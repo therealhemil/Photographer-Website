@@ -15,6 +15,10 @@
     <!-- link javascript -->
     <script src="/js/admin_dashboard.js"></script>
 
+    <!-- admin sidebar js  -->
+    <script src="/js/admin_sidebar.js"></script>
+
+
 </head>
 
 <body>
@@ -23,19 +27,20 @@
 
         <!-- Admin Dashboard Sidebar -->
         <%- include("../partials/adminDashboard_sidebar") %>
-    
-        <main class="admin-shell">
-            <section class="admin-hero">
-                <div>
-                    <p class="eyebrow">Admin Dashboard</p>
-                    <h1>Manage registered users with a cleaner workflow.</h1>
-                    <p class="hero-copy">Review account details, update profile information, and remove outdated users from
-                        one modern control panel.</p>
+
+            <main class="admin-shell">
+                <section class="admin-hero">
+                    <div>
+                        <p class="eyebrow">Admin Dashboard</p>
+                        <h1>Manage registered users with a cleaner workflow.</h1>
+                        <p class="hero-copy">Review account details, update profile information, and remove outdated
+                            users from
+                            one modern control panel.</p>
                     </div>
-                    <a class="hero-link" href="/">Back to website</a>
+                    <a class="hero-link" href="/">Go to website</a>
                 </section>
-                
-                
+
+
                 <section class="stats-grid">
                     <article class="stat-card">
                         <span>Total Users</span>
@@ -62,7 +67,7 @@
                         </strong>
                     </article>
                 </section>
-                
+
                 <section class="admin-grid">
                     <div class="panel panel-table">
                         <div class="panel-head">
@@ -72,99 +77,100 @@
                             </div>
                             <input type="search" id="userSearch" placeholder="Search by name, email, or gender">
                         </div>
-                        
+
                         <p class="admin-message" id="adminMessage"></p>
-                        
+
                         <div class="table-wrap">
                             <table class="users-table">
                                 <thead>
                                     <tr>
                                         <th>ID</th>
                                         <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Gender</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersTableBody">
-                            <% if (users.length) { %>
-                                <% users.forEach((user)=> { %>
-                                    <tr data-user-id="<%= user.id %>"
-                                        data-first-name="<%= user.first_name || '' %>"
-                                        data-last-name="<%= user.last_name || '' %>"
-                                        data-email="<%= user.email || '' %>" data-gender="<%= user.gender || '' %>">
-                                        <td>
-                                            <%= user.id %>
-                                        </td>
-                                        <td data-field="first_name">
-                                            <%= user.first_name || '-' %>
-                                        </td>
-                                        <td data-field="last_name">
-                                            <%= user.last_name || '-' %>
-                                        </td>
-                                        <td data-field="email">
-                                            <%= user.email || '-' %>
-                                        </td>
-                                        <td data-field="gender">
-                                            <%= user.gender || '-' %>
-                                        </td>
-                                        <td>
-                                            <div class="table-actions">
-                                                <button class="edit-btn" type="button">Modify</button>
-                                                <button class="delete-btn" type="button">Delete</button>
-                                            </div>
-                                        </td>
+                                        <th>Last Name</th>
+                                        <th>Email</th>
+                                        <th>Gender</th>
+                                        <th>Actions</th>
                                     </tr>
-                                    <% }) %>
-                                    <% } else { %>
-                                            <tr class="empty-row">
-                                                <td colspan="6">No users found in the database yet.</td>
+                                </thead>
+                                <tbody id="usersTableBody">
+                                    <% if (users.length) { %>
+                                        <% users.forEach((user)=> { %>
+                                            <tr data-user-id="<%= user.id %>"
+                                                data-first-name="<%= user.first_name || '' %>"
+                                                data-last-name="<%= user.last_name || '' %>"
+                                                data-email="<%= user.email || '' %>"
+                                                data-gender="<%= user.gender || '' %>">
+                                                <td>
+                                                    <%= user.id %>
+                                                </td>
+                                                <td data-field="first_name">
+                                                    <%= user.first_name || '-' %>
+                                                </td>
+                                                <td data-field="last_name">
+                                                    <%= user.last_name || '-' %>
+                                                </td>
+                                                <td data-field="email">
+                                                    <%= user.email || '-' %>
+                                                </td>
+                                                <td data-field="gender">
+                                                    <%= user.gender || '-' %>
+                                                </td>
+                                                <td>
+                                                    <div class="table-actions">
+                                                        <button class="edit-btn" type="button">Modify</button>
+                                                        <button class="delete-btn" type="button">Delete</button>
+                                                    </div>
+                                                </td>
                                             </tr>
-                                            <% } %>
-                                        </tbody>
-                                    </table>
-                </div>
-            </div>
-            <aside class="panel panel-form">
-                <div class="panel-head vertical">
-                    <div>
-                        <h2>Modify User</h2>
-                        <p>Choose a user from the table to update their account details.</p>
+                                            <% }) %>
+                                                <% } else { %>
+                                                    <tr class="empty-row">
+                                                        <td colspan="6">No users found in the database yet.</td>
+                                                    </tr>
+                                                    <% } %>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
-                    <span class="selected-user" id="selectedUserBadge">No user selected</span>
-                </div>
-                
-                <form id="adminUserForm">
-                    <input type="hidden" name="id" id="userId">
-                    
-                    <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
-                    
-                    <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-                    
-                    <!-- <label for="email">Email Address</label>
+                    <aside class="panel panel-form">
+                        <div class="panel-head vertical">
+                            <div>
+                                <h2>Modify User</h2>
+                                <p>Choose a user from the table to update their account details.</p>
+                            </div>
+                            <span class="selected-user" id="selectedUserBadge">No user selected</span>
+                        </div>
+
+                        <form id="adminUserForm">
+                            <input type="hidden" name="id" id="userId">
+
+                            <label for="first_name">First Name</label>
+                            <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+
+                            <label for="last_name">Last Name</label>
+                            <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
+
+                            <!-- <label for="email">Email Address</label>
                     <input type="email" id="email" name="email" placeholder="Email Address" required> -->
-                    
-                    <label for="gender">Gender</label>
-                    <select id="gender" class="gender-toggleDown" name="gender" required>
-                        <option value="">Select gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
-                        <option value="other">Other</option>
-                    </select>
-                    
-                    <div class="form-actions">
-                        <button type="submit" class="primary-btn">Save Changes</button>
-                        <button type="button" class="secondary-btn" id="clearSelection">Clear</button>
-                    </div>
-                </form>
-            </aside>
-        </section>
-    </main>
-</div>
-    
+
+                            <label for="gender">Gender</label>
+                            <select id="gender" class="gender-toggleDown" name="gender" required>
+                                <option value="">Select gender</option>
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                                <option value="other">Other</option>
+                            </select>
+
+                            <div class="form-actions">
+                                <button type="submit" class="primary-btn">Save Changes</button>
+                                <button type="button" class="secondary-btn" id="clearSelection">Clear</button>
+                            </div>
+                        </form>
+                    </aside>
+                </section>
+            </main>
+    </div>
+
 
 </body>
 

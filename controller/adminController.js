@@ -1,3 +1,4 @@
+const { contactPageQuery } = require("../models/contactPageModel")
 const { UserQuery } = require("../models/UserModel")
 
 const dashboard = async (req, res) => {
@@ -81,4 +82,69 @@ const updateUser = async (req, res) => {
     }
 }
 
-module.exports = { dashboard, deleteUser, updateUser }
+
+const contactPage_Rener = async(req,res) =>{
+    try{
+        //get single contact record
+        let contact = await contactPageQuery.findOne()
+
+        //if no data in DB, prevent crash
+        if(!contact){
+            contact = {
+                address : "",
+                phone_number: "",
+                email: ""
+            }
+        }       
+    res.render("pages/Contact_us_page", {contact}) 
+
+    }catch (err){
+        console.log("Contact DB Error:",err)
+        res.render("pages/Contact_us_page", {
+            contact :{}
+        })
+    }
+}
+
+const UpdateContact = async(req, res) =>{
+
+    console.log("API Hitting");
+    
+    try{
+        const {address, phone_number, email} = req.body
+        
+        //let check if record exists
+        let contact = await contactPageQuery.findOne()
+
+        if(contact){
+            await contact.update({
+                address,
+                phone_number,
+                email
+            })
+        }else {
+            // create new entry
+            contact = await contactPageQuery.create({
+                address,
+                phone_number,
+                email
+            })
+        }
+
+        res.json({
+            message : "Contact Updated Successfully",
+            type : "success"
+        })
+
+    }catch (err){
+        console.log(err);
+        res.status(500).json({
+            message : "Update Failed",
+            type : "error"
+        })
+        
+    }
+}
+
+
+module.exports = { dashboard, deleteUser, updateUser, contactPage_Rener, UpdateContact }

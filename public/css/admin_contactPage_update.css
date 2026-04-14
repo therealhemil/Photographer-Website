@@ -1,0 +1,152 @@
+:root {
+    --sidebar-width: 260px;
+
+    --bg: #07111f;
+    --panel: rgba(10, 20, 36, 0.85);
+    --border: rgba(255,255,255,0.08);
+    --text: #ecf3ff;
+    --muted: #9db1ca;
+    --accent: #ff9f43;
+    --accent-strong: #ff7a18;
+}
+
+/* GLOBAL FIX */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    overflow-x: hidden; /* ✅ prevents overflow bug */
+    font-family: "Segoe UI", sans-serif;
+    color: var(--text);
+    background:
+        radial-gradient(circle at top left, rgba(255, 159, 67, 0.18), transparent 30%),
+        linear-gradient(135deg, #040814 0%, #091424 50%, #0b1d30 100%);
+}
+
+/* MAIN CONTENT */
+.admin-shell {
+    margin-left: var(--sidebar-width);
+    padding: 32px;
+    width: calc(100% - var(--sidebar-width));
+    max-width: 1200px;
+}
+
+/* PANELS / BARS FIX */
+.panel,
+.admin-hero,
+.stat-card {
+    width: 100%;
+    max-width: 100%;
+    backdrop-filter: blur(18px);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+}
+
+/* FORM PANEL */
+.panel {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+/* FORM */
+form {
+    display: grid;
+    gap: 16px;
+    margin: 60px 350px;
+}
+
+label {
+    font-size: 0.9rem;
+    color: #d6e3f7;
+}
+
+input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+    outline: none;
+}
+
+input:focus {
+    border-color: var(--accent);
+}
+
+/* BUTTON FIX */
+button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+    color: #111827;
+}
+
+/* ============================= */
+/* ✅ RESPONSIVE */
+/* ============================= */
+
+/* TABLET */
+@media (max-width: 992px) {
+
+    :root {
+        --sidebar-width: 200px;
+    }
+
+    .sidebar {
+        width: 200px;
+    }
+
+    .admin-shell {
+        margin-left: 200px;
+        width: calc(100% - 200px);
+        padding: 24px;
+    }
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .menu {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+    }
+
+    .menu li {
+        flex-direction: column;
+        padding: 10px;
+    }
+
+    .admin-shell {
+        margin-left: 0;
+        width: 100%;
+        padding: 20px;
+    }
+}
+
+/* SMALL MOBILE */
+@media (max-width: 480px) {
+
+    .panel {
+        padding: 20px;
+    }
+
+    input {
+        font-size: 14px;
+    }
+}

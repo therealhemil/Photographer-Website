@@ -1,6 +1,6 @@
-/* SIDEBAR BASE */
+/* SIDEBAR (ALWAYS FIXED WIDTH) */
 .sidebar {
-    width: 70px; /* collapsed */
+    width: 260px; /* fixed width */
     height: 100vh;
     position: fixed;
     top: 0;
@@ -8,15 +8,8 @@
     background: rgba(11, 29, 48, 0.95);
     backdrop-filter: blur(10px);
     color: #fff;
-    transition: width 0.3s ease;
     z-index: 1000;
-    overflow: hidden;
     border-right: 1px solid rgba(255,255,255,0.08);
-}
-
-/* HOVER EXPAND */
-.sidebar:hover {
-    width: 260px;
 }
 
 /* LOGO */
@@ -51,46 +44,29 @@
     color: #111;
 }
 
-/* ICON */
-.menu i {
-    font-size: 18px;
-    min-width: 24px;
-    text-align: center;
-}
-
-/* TEXT HIDDEN */
-.menu span {
-    opacity: 0;
-    white-space: nowrap;
-    transition: opacity 0.2s ease;
-}
-
-/* SHOW TEXT ON HOVER */
-.sidebar:hover .menu span {
-    opacity: 1;
+.menu li.active a {
+    color: #fff;
+    font-weight: 600;
 }
 
 .menu li a {
     color: white;
     text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
 }
 
-/* LOGO TEXT HIDE */
-.logo {
-    white-space: nowrap;
-    overflow: hidden;
+/* ICON */
+.menu i {
+    min-width: 20px;
+    text-align: center;
 }
 
-/* DASHBOARD CONTENT */
+/* MAIN CONTENT (FIXED POSITION OFFSET) */
 .admin-shell {
-    margin-left: 70px;
+    margin-left: 260px; /* SAME as sidebar width */
     padding: 32px;
-    width: calc(100% - 70px);
-    transition: 0.3s ease;
-}
-
-/* SHIFT CONTENT ON HOVER */
-.sidebar:hover ~ .admin-shell {
-    margin-left: 240px;
-    width: calc(100% - 240px);
+    width: calc(100% - 260px);
 }

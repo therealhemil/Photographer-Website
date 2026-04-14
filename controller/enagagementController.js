@@ -1,6 +1,6 @@
 const { contactMessageQuery } = require("../models/contactModel")
 const { Subscribe_emailQuery } = require('../models/subscribe_emailModel')
-
+const { contactPageQuery } = require('../models/contactPageModel');
 
 // Contact From submit
 const SubmitContactForm = async (req, res) => {

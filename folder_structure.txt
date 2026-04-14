@@ -1,0 +1,16 @@
+photogtraphy Website/
+├── models/         # Database logic (Schemas)
+├── views/          # HTML templates (EJS or Pug files)
+├── controllers/    # Request handling logic
+├── routes/         # URL paths
+├── app.js          # Entry point
+└── package.json
+
+
+
+requirements:
+
+1. use sequelize for orm model to make a website that user login and admin login different but use same database to user identify
+2. admin or user successfully sign up and after 1 sec redirect into his dashboard
+3. admin dashboard cannot go with the /admin/dashboard and same with the user also
+4. admin can modify and delete database data in mvc architecture

@@ -1,0 +1,123 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.8)),
+        url("https://images.pexels.com/photos/414612/pexels-photo-414612.jpeg") center/cover;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* container */
+.auth-container {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+/* box */
+.auth-box {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    width: 450px;
+    border-radius: 15px;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* headings */
+.auth-box h2 {
+    margin-bottom: 10px;
+}
+
+.auth-box p {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 8px;
+
+}
+.signup-message{
+    font-size: 17px;
+    transition: 0.3s;
+    margin-top: 3px;
+}
+
+/* row inputs */
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+/* inputs + select */
+.auth-box input,
+.auth-box select {
+    width: 100%;
+    height: 45px;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+/* focus effect */
+.auth-box input:focus,
+.auth-box select:focus {
+    border-color: #f39c12;
+    outline: none;
+}
+
+/* button */
+.auth-box button {
+    width: 100%;
+    height: 45px;
+    margin-top: 10px;
+    background: #000;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.auth-box button:hover {
+    background: #f39c12;
+}
+
+/* link */
+.switch {
+    margin-top: 15px;
+}
+
+.switch a {
+    color: #f39c12;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 600px) {
+
+    .auth-box {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .row {
+        flex-direction: column;
+    }
+
+    .auth-box input,
+    .auth-box select {
+        height: 42px;
+    }
+
+}

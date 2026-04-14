@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" media="screen and (max-width:1100px)" href="/css/reponsive-style.css">
+    <script src="/js/script.js"></script>
+    <script src="/js/auth.js"></script>
+</head>
+
+<body>
+
+    <!-- Header Here-->
+     <%- include("../partials/header") %>
+
+    <!-- Company Details -->
+    <section>
+        <div class="company-details-container">
+            <div class="com-detail-box">
+
+                <!-- Address box -->
+                <div class="com-detail-box-box">
+                    <ul>
+                        <li class="contant-item">📍</li>
+                        <li class="contant-item"><a href="#">351,Galaxy infoways Vastral,<br>Ahmedabad, Gujarat,
+                                India</a></li>
+                    </ul>
+                </div>
+
+                <!-- phone-number box -->
+                <div class="com-detail-box-box">
+                    <ul>
+                        <li class="contant-item">📞</li>
+                        <li class="contant-item"><a href="tel:#">+91 9876543210</a></li>
+                    </ul>
+                </div>
+
+                <!-- Mail box -->
+                <div class="com-detail-box-box border-right">
+                    <ul>
+                        <li class="contant-item">✉</li>
+                        <li class="contant-details"><a href="mailto:#"> info@samsphoto.com</a></li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- map & contact form -->
+    <section>
+        <div class="map-form-container">
+
+            <!-- Form Details-->
+            <section>
+                <div class="form-section">
+                    <div class="contact-form-details">
+                        <div class="contact-form">
+                            <h2>Contact me</h2>
+                        </div>
+                        <div class="contact-form-box">
+                            <form class="contact-me-form"> <!-- onsubmit="submitForm(event)" -->
+                                <input type="text" id="name" name="fullname" placeholder="Full Name" required>
+                                <input type="email" id="email" name="email" placeholder="Email" required>
+                                <input type="tel" id="phone" name="phone" placeholder="Phone" required>
+                                <input type="text" id="msg" name="msg" placeholder="Your Message" style="height:50px"
+                                    maxlength="250" required>
+                                <div class="form-btn">
+                                    <button type="submit">Submit</button>
+                                </div>
+                            </form>
+                            <p class="contct-message"></p>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+
+
+            <!-- Google map embed -->
+            <div class="maps">
+                <iframe src="https://maps.google.com/maps?q=Ahmedabad&t=&z=13&ie=UTF8&iwloc=&output=embed" width="600"
+                    height="450" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- footer here-->
+     <%- include("../partials/footer")%>
+
+
+</body>
+
+</html>

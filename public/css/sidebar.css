@@ -1,0 +1,96 @@
+/* SIDEBAR BASE */
+.sidebar {
+    width: 70px; /* collapsed */
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: rgba(11, 29, 48, 0.95);
+    backdrop-filter: blur(10px);
+    color: #fff;
+    transition: width 0.3s ease;
+    z-index: 1000;
+    overflow: hidden;
+    border-right: 1px solid rgba(255,255,255,0.08);
+}
+
+/* HOVER EXPAND */
+.sidebar:hover {
+    width: 260px;
+}
+
+/* LOGO */
+.logo {
+    padding: 20px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* MENU */
+.menu {
+    list-style: none;
+    padding: 10px;
+}
+
+.menu li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.menu li:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+.menu li.active {
+    background: linear-gradient(135deg, #ff9f43, #ff7a18);
+    color: #111;
+}
+
+/* ICON */
+.menu i {
+    font-size: 18px;
+    min-width: 24px;
+    text-align: center;
+}
+
+/* TEXT HIDDEN */
+.menu span {
+    opacity: 0;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+}
+
+/* SHOW TEXT ON HOVER */
+.sidebar:hover .menu span {
+    opacity: 1;
+}
+
+.menu li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* LOGO TEXT HIDE */
+.logo {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+/* DASHBOARD CONTENT */
+.admin-shell {
+    margin-left: 70px;
+    padding: 32px;
+    width: calc(100% - 70px);
+    transition: 0.3s ease;
+}
+
+/* SHIFT CONTENT ON HOVER */
+.sidebar:hover ~ .admin-shell {
+    margin-left: 240px;
+    width: calc(100% - 240px);
+}

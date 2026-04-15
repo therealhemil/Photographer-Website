@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inquiry Table</title>
+
+    <!-- css link -->
+    <link rel="stylesheet" href="/css/InquiryTable.css">
+</head>
+
+<body>
+    <div class="layouts">
+
+        <%- include("../partials/adminDashboard_sidebar") %>
+
+            <div class="admin-shell">
+
+                <div class="inquiry-container">
+
+                    <!-- HEADER -->
+                    <div class="inquiry-header">
+                        <div>
+                            <h1>Inquiry Table</h1>
+                            <p>Search, review and manage user inquiries</p>
+                        </div>
+
+                        <div class="search-box">
+                            <input type="text" placeholder="Search by name, email, phone">
+                        </div>
+                    </div>
+
+                    <!-- TABLE CARD -->
+                    <div class="table-card">
+                        <table class="contactInquiry-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Message</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <% if (contacts && contacts.length> 0) { %>
+                                    <% contacts.forEach(contact=> { %>
+                                        <tr>
+                                            <td>
+                                                <%= contact.id %>
+                                            </td>
+                                            <td>
+                                                <%= contact.name || '-' %>
+                                            </td>
+                                            <td>
+                                                <%= contact.email || '-' %>
+                                            </td>
+                                            <td>
+                                                <%= contact.phone || '-' %>
+                                            </td>
+                                            <td class="message">
+                                                <%= contact.message || '-' %>
+                                            </td>
+                                        </tr>
+                                        <% }) %>
+                                            <% } else { %>
+                                                <tr class="empty-row">
+                                                    <td colspan="5">No inquiries found</td>
+                                                </tr>
+                                                <% } %>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+    </div>
+</body>
+
+</html>

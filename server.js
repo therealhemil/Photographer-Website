@@ -5,6 +5,7 @@ require('dotenv').config({path: './.env'})
 const express = require('express');
 const app = express();
 const path = require('path')
+const uploadRouter = require('./uploadImage')
 
 // cookie-parser to set token in cookie as a moddileware
 const cookieParser = require('cookie-parser')
@@ -57,7 +58,11 @@ app.use("/", pageRoute)
 app.use("/", enagagementController)
 app.use("/", enagagementController)
 app.use("/", admin_dashboard)
-// app.use("/", enagagementController)
+
+// app.use("/upload", uploadRouter);
+
+// app.use("/", enagagementController)app.use("/v1/upload", uploadRouter);
+
 
 //listen server port
 const PORT = 3000;

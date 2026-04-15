@@ -16,5 +16,7 @@ module.exports = {
     renderSignup: renderView("pages/authpages/signup_page", { message: "", type: "" }),
     renderlogin: renderView("pages/authpages/login_page", { message: "", type: "" }),
     renderAdminLogin: renderView("pages/authpages/admin_login_page", { message: "", type: "" }),
-    rendercontactPage_update : renderView("contactPage_Update")
-}
+    rendercontactPage_update : renderView("contactPage_Update"),
+    // renderInquiryTable : renderView("Inquiry_Table")
+    renderUploadImages : renderView("uploadImages")
+}   

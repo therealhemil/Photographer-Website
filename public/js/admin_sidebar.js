@@ -47,4 +47,25 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = "/admin/contactPage_Update"
     })
 
+
+    // get redirect into Inquiry Table
+    document.querySelector(".ContactMe_Form_dashbaord").addEventListener("click", async () => {
+        await fetch("/admin/inquiry_Table", {
+            method: "GET"
+        })
+
+        window.location.href = "/admin/inquiry_Table"
+    })
+
+
+    //get redirect into portfolio upload pages:
+    document.getElementById("portfolioImgaesUpload").addEventListener("click", async () => {
+        await fetch("/admin/uploadImage", {
+            method: "GET"
+        })
+        window.location.href = "/admin/uploadImage"
+    })
+
+
+
 })

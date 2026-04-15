@@ -1,0 +1,37 @@
+<!-- css link -->
+ <link rel="stylesheet" href="/css/uploadImgae.css">
+
+<script src="/js/UploadImages.js"></script>
+
+<body>
+
+    <%- include("../partials/adminDashboard_sidebar") %>
+
+    <div class="main-content">
+        <div class="upload-container">
+
+            <h2>Upload Files</h2>
+
+            <!-- Drag & Drop Area -->
+            <div id="dropArea" class="drop-area">
+                <p>📁 Drag & Drop files here</p>
+                <span>or</span>
+                <button type="button" id="browseBtn">Browse Files</button>
+                <input type="file" id="fileInput" multiple="imgaes/*" hidden>
+            </div>
+
+            <!-- File Preview List -->
+            <div id="fileList" class="file-list"></div>
+
+            <!-- Progress Bar -->
+            <div id="progressBarContainer" class="progress-container hidden">
+                <div id="progressBar"></div>
+            </div>
+
+            <!-- Upload Button -->
+            <button id="uploadBtn" class="upload-btn" disabled>Upload</button>
+
+        </div>
+    </div>
+
+</body>

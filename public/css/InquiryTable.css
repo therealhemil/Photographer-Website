@@ -1,0 +1,220 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+.layout {
+    display: block;
+}
+
+
+body {
+    margin: 0;
+    background: #07111f; /* SAME as dashboard */
+}
+
+/* ===== LAYOUT ===== */
+.admin-shell {
+    margin-left: 260px;
+    padding: 40px;
+    width: calc(100% - 260px);
+    min-height: 100vh;
+    background: linear-gradient(180deg, #06101f, #071a33);
+    box-sizing: border-box;
+}
+
+/* ===== CONTAINER ===== */
+.inquiry-container {
+    max-width: 1200px;
+    margin: auto;
+}
+
+/* ===== HEADER ===== */
+.inquiry-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.inquiry-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #eaf2ff;
+}
+
+.inquiry-header p {
+    color: #8fa6c4;
+    margin-top: 6px;
+}
+
+/* ===== SEARCH ===== */
+.search-box {
+    width: 300px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+    padding: 12px 16px;
+    transition: 0.2s;
+}
+
+.search-box:focus-within {
+    border-color: #ff9f43;
+    box-shadow: 0 0 0 2px rgba(255,159,67,0.2);
+}
+
+.search-box input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 14px;
+}
+
+/* ===== TABLE CARD ===== */
+.table-card {
+    background: rgba(10, 25, 50, 0.7);
+    border-radius: 24px;
+    padding: 10px 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    backdrop-filter: blur(18px);
+}
+
+/* ===== TABLE ===== */
+.contactInquiry-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed; /* 🔥 IMPORTANT FIX */
+}
+
+/* ===== COLUMN WIDTH FIX ===== */
+.contactInquiry-table th:nth-child(1),
+.contactInquiry-table td:nth-child(1) {
+    width: 8%;
+}
+
+.contactInquiry-table th:nth-child(2),
+.contactInquiry-table td:nth-child(2) {
+    width: 18%;
+}
+
+.contactInquiry-table th:nth-child(3),
+.contactInquiry-table td:nth-child(3) {
+    width: 25%;
+}
+
+.contactInquiry-table th:nth-child(4),
+.contactInquiry-table td:nth-child(4) {
+    width: 17%;
+}
+
+.contactInquiry-table th:nth-child(5),
+.contactInquiry-table td:nth-child(5) {
+    width: 32%;
+}
+
+/* ===== HEADER ===== */
+.contactInquiry-table th {
+    text-align: left;
+    padding: 18px 12px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #9fb3d1;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* ===== BODY ===== */
+.contactInquiry-table td {
+    padding: 20px 12px;
+    color: #e6edf7;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    vertical-align: middle;
+}
+
+/* ===== ALIGNMENT FIX ===== */
+.contactInquiry-table th,
+.contactInquiry-table td {
+    text-align: left;
+    white-space: nowrap;
+}
+
+/* ===== MESSAGE COLUMN FIX ===== */
+.contactInquiry-table td:nth-child(5) {
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* ===== ROW HOVER ===== */
+.contactInquiry-table tbody tr:hover {
+    background: rgba(255,255,255,0.04);
+}
+
+/* ===== ID STYLE ===== */
+.contactInquiry-table td:first-child {
+    color: #8fa6c4;
+}
+
+/* HEADER */
+.contactInquiry-table th {
+    text-align: left;
+    padding: 16px;
+    font-size: 12px;
+    letter-spacing: 1px;
+    color: #9fb3d1;
+    text-transform: uppercase;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+/* BODY */
+.contactInquiry-table td {
+    padding: 18px 16px;
+    color: #e6edf7;
+    font-size: 14px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+/* ROW HOVER */
+.contactInquiry-table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.contactInquiry-table tbody tr:hover {
+    background: rgba(255,255,255,0.04);
+}
+
+/* ID STYLE */
+.contactInquiry-table td:first-child {
+    color: #8fa6c4;
+}
+
+/* MESSAGE COLUMN */
+.message {
+    max-width: 320px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* EMPTY */
+.empty-row td {
+    text-align: center;
+    padding: 30px;
+    color: #8fa6c4;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    .inquiry-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .search-box {
+        width: 100%;
+    }
+}

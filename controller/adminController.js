@@ -1,3 +1,4 @@
+const { contactMessageQuery } = require("../models/contactModel")
 const { contactPageQuery } = require("../models/contactPageModel")
 const { UserQuery } = require("../models/UserModel")
 
@@ -146,5 +147,18 @@ const UpdateContact = async(req, res) =>{
     }
 }
 
+const getInquiryTableData = async(req, res) =>{
+    try {
+        const contacts = await contactMessageQuery.findAll()
 
-module.exports = { dashboard, deleteUser, updateUser, contactPage_Rener, UpdateContact }
+        res.render("Inquiry_Table", {contacts : contacts} )
+
+    } catch (err) {
+        console.log(err);
+        res.status(500).send("Server Error")
+        
+    }
+}
+
+
+module.exports = { dashboard, deleteUser, updateUser, contactPage_Rener, UpdateContact, getInquiryTableData }

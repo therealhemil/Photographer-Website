@@ -17,7 +17,7 @@ const contactMessageQuery = db.define("contact_us", {
         unique : true
     },
     phone: {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         allowNull: false
     },
     message: {

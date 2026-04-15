@@ -109,6 +109,11 @@ document.addEventListener("DOMContentLoaded", () => {
             message.style.color = data.type === "success" ? "green" : "red"
             this.reset()
 
+            // reload after 2 sec if successfully submit
+            setTimeout(() => {
+                    location.reload()
+                }, 2000)
+
         } catch (err) {
             console.log(err);
         }
@@ -286,6 +291,7 @@ document.addEventListener("DOMContentLoaded", () => {
         
                 message.innerText = data.message;
                 message.style.color = data.type === "success" ? "green" : "red";
+
 
         } catch (err) {
             console.log("Error:", err);

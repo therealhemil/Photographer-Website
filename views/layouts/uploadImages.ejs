@@ -1,5 +1,6 @@
+<title>Portfolio Update</title>
 <!-- css link -->
- <link rel="stylesheet" href="/css/uploadImgae.css">
+<link rel="stylesheet" href="/css/uploadImgae.css">
 
 <script src="/js/UploadImages.js"></script>
 
@@ -7,31 +8,127 @@
 
     <%- include("../partials/adminDashboard_sidebar") %>
 
-    <div class="main-content">
-        <div class="upload-container">
+        <div class="main-content">
 
-            <h2>Upload Files</h2>
-
-            <!-- Drag & Drop Area -->
-            <div id="dropArea" class="drop-area">
-                <p>📁 Drag & Drop files here</p>
-                <span>or</span>
-                <button type="button" id="browseBtn">Browse Files</button>
-                <input type="file" id="fileInput" multiple="imgaes/*" hidden>
+            <div class="page-header">
+                Portfolio Manager
             </div>
 
-            <!-- File Preview List -->
-            <div id="fileList" class="file-list"></div>
+            <div class="card">
 
-            <!-- Progress Bar -->
-            <div id="progressBarContainer" class="progress-container hidden">
-                <div id="progressBar"></div>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Images (JSON)</th>
+                                <th>Upload</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            <% portfolios.forEach(p=> { %>
+                                <tr>
+                                    <!-- ID -->
+                                    <td>
+                                        <%= p.id %>
+                                    </td>
+
+                                    <!-- TITLE -->
+                                    <td>
+                                        <%= p.title %>
+                                    </td>
+
+                                    <!-- IMAGES -->
+                                    <td>
+                                        <div class="image-box">
+                                            <% if(p.images && p.images.length){ %>
+                                                <% p.images.forEach(img=> { %>
+                                                    <div class="img-wrapper">
+                                                        <img src="<%= img %>">
+
+                                                        <!-- delete button each image -->
+                                                        <button type="button" class="delete-image-btn" data-id="<%= p.id %>"
+                                                            data-img="<%= img %>">X</button>
+                                                    </div>
+                                                    <% }) %>
+                                                        <% } else { %>
+                                                            <span>No images</span>
+                                                            <% } %>
+                                        </div>
+                                    </td>
+
+                                    <!-- UPLOAD -->
+                                    <td>
+                                        <!-- BUTTON -->
+                                        <button class="upload-btn" data-id="<%= p.id %>"
+                                            data-title="<%= p.title %>">⬆️</button>
+
+                                        <!-- DRAG DROP -->
+                                        <form class="Uploding_images" enctype="multipart/form-data">
+
+                                            <div id="uploadModal" class="modal">
+
+                                                <div class="main-content modal-content">
+
+                                                    <div class="upload-container">
+
+                                                        <h2 id="modalTitle">Upload Files</h2>
+                                                        </h2>
+
+                                                        <!-- Drag & Drop Area -->
+                                                        <div id="dropArea" class="drop-area">
+                                                            <p>📁 Drag & Drop files here</p>
+                                                            <span>or</span>
+                                                            <button type="button" id="browseBtn">Browse Files</button>
+                                                            <input type="file" id="fileInput" multiple="images/*"
+                                                                hidden>
+                                                        </div>
+
+                                                        <!-- File Preview List -->
+                                                        <div id="fileList" class="file-list"></div>
+
+                                                        <!-- Progress Bar -->
+                                                        <div id="progressBarContainer"
+                                                            class="progress-container hidden">
+                                                            <div id="progressBar"></div>
+                                                        </div>
+
+                                                        <!-- Upload Button -->
+                                                        <button type="button" id="uploadBtn" class="newUploadBtn"
+                                                            data-id="<%= p.id %>" data-title="<%= p.title %>"
+                                                            disabled>Upload</button>
+
+                                                        <!-- CLOSE -->
+                                                        <button type="button" class="close-btn">✖</button>
+
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                        </form>
+
+
+                                </tr>
+                                </td>
+                                </form>
+
+                                <% }) %>
+                        </tbody>
+                    </table>
+
+                    <!-- ADD TITLE -->
+                    <form class="add-title">
+                        <input type="text" name="title" placeholder="New Title Add" required>
+                        <button type="submit">Add Title</button>
+                    </form>
+                </div>
             </div>
-
-            <!-- Upload Button -->
-            <button id="uploadBtn" class="upload-btn" disabled>Upload</button>
 
         </div>
-    </div>
 
 </body>
+
+</html>

@@ -1,103 +1,262 @@
-document.addEventListener("DOMContentLoaded", async () => {
-    const dropArea = document.getElementById('dropArea')
-    const fileInput = document.getElementById("fileInput");
-    const browseBtn = document.getElementById("browseBtn");
-    const fileList = document.getElementById("fileList");
-    const uploadBtn = document.getElementById("uploadBtn");
-    const progressBar = document.getElementById("progressBar");
-    const progressContainer = document.getElementById("progressBarContainer");
+document.addEventListener("DOMContentLoaded", () => {
 
-    let files = []
+    //  ADD TITLE 
+    document.querySelector(".add-title").addEventListener("submit", async (e) => {
 
-    //open file picker
-    browseBtn.onclick = () => fileInput.click()
+        e.preventDefault();
 
-    //handle file select
-    fileInput.addEventListener('change', (e) => {
-        addFiles(e.target.files)
-    })
+        const title = e.target.title.value;
 
-    //drag events
-    dropArea.addEventListener('dragover', (e) => {
-        e.preventDefault()
-        dropArea.classList.add("active")
-    })
+        try {
+            const res = await fetch("/admin/upload-image/newTitle", {
+                method: 'POST',
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ title })
+            });
 
-    dropArea.addEventListener("dragleave", () => {
-        dropArea.classList.remove("active");
+            if (!res.ok) throw new Error("Adding Title Error");
+
+            const data = await res.json()
+            if (data.type === "success") {
+                alert("Title Added Successfully");
+            }
+            else {
+                alert(data.message)
+            }
+
+            setTimeout(() => location.reload(), 800);
+
+        } catch (err) {
+            console.log(err);
+            alert(err.message);
+        }
+
     });
 
+
+
+    let currentId = null;
+    let files = [];
+
+    const modal = document.getElementById("uploadModal");
+    const fileInput = document.getElementById("fileInput");
+    const dropArea = document.getElementById("dropArea");
+    const fileList = document.getElementById("fileList");
+    const uploadBtn = document.getElementById("uploadBtn");
+    const browseBtn = document.getElementById("browseBtn");
+
+    //  OPEN MODAL 
+    document.querySelectorAll(".upload-btn").forEach(btn => {
+        btn.addEventListener("click", function () {
+            currentId = this.dataset.id;
+            const title = this.dataset.title
+
+            console.log("ID:", currentId);
+            console.log("Title:", title);
+
+            if (!currentId) {
+                alert("ID Missing!")
+                return
+            }
+
+            uploadBtn.dataset.id = currentId
+            uploadBtn.dataset.title = title
+
+            modal.style.display = "flex";
+
+            //set Modal title Dyanamically
+            document.getElementById("modalTitle").innerHTML = `Upload Files to ${title}`
+
+            files = [];
+            // renderFiles();
+        });
+    });
+
+    //  CLOSE MODAL 
+    window.closeModal = function () {
+        modal.style.display = "none";
+    };
+
+    document.querySelector(".close-btn").addEventListener("click", () => {
+        closeModal()
+    })
+
+    // ESC CLOSE
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+    });
+
+    //  BROWSE FILE 
+    browseBtn.addEventListener("click", () => {
+        console.log("Browse button clicked");
+        fileInput.click()
+    });
+
+    //  FILE INPUT 
+    fileInput.addEventListener("change", (e) => {
+        console.log("Change event registered");
+        addFiles(e.target.files);
+    });
+
+    //  DRAG DROP 
+    dropArea.addEventListener("dragover", (e) => {
+        e.preventDefault();
+        dropArea.classList.add("dragover");
+    });
+
+    dropArea.addEventListener("dragleave", () => {
+        dropArea.classList.remove("dragover");
+    });
 
     dropArea.addEventListener("drop", (e) => {
         e.preventDefault();
-        dropArea.classList.remove("active");
+        dropArea.classList.remove("dragover");
         addFiles(e.dataTransfer.files);
     });
 
-    // add files
-    function addFiles(selected) {
-        for (let file of selected){
-            if(!files.find(f => f.name === file.name && f.size === file.size)){
-                files.push(file)
-            }
+    //  ADD FILES 
+    function addFiles(selectedFiles) {
+        const newFiles = Array.from(selectedFiles);
+
+        console.log("New Files", newFiles);
+
+        newFiles.forEach(file => {
+            console.log("file", file);
+            const exists = files.some(f => f.name === file.name && f.size === file.size);
+            console.log("Exists", exists);
+            if (!exists) files.push(file);
+            console.log("Files pushed", files);
+        });
+
+        renderFiles();
+    }
+
+    //  RENDER FILE LIST 
+    function renderFiles() {
+        fileList.innerHTML = "";
+
+        files.forEach((file, index) => {
+            const div = document.createElement("div");
+            div.className = "file-item";
+
+            div.innerHTML = `
+                ${file.name}
+                <button data-index="${index}" class="remove-file">✖</button>
+            `;
+
+            fileList.appendChild(div);
+        });
+
+        uploadBtn.disabled = files.length === 0;
+    }
+
+    //  REMOVE FILE 
+    fileList.addEventListener("click", (e) => {
+        if (e.target.classList.contains("remove-file")) {
+            const index = e.target.dataset.index;
+            files.splice(index, 1);
+            renderFiles();
         }
-        renderFiles()
-    }
-
-    //render UI
-    function renderFiles(){
-        fileList.innerHTML =""
-        
-        files.forEach((file, index)=>{
-            const div = document.createElement("div")
-            div.className = "file-item"
-
-            div.innerHTML = `<span>${file.name}</span>
-            <button onclick="removeFile(${index})">X</button>`
-
-            fileList.appendChild(div)
-        })
-        uploadBtn.disabled = files.length === 0
-    }
+    });
 
 
-    //remove files
-    function removeFile(index){
-        files.splice(index, 1)
-        renderFiles()
-    }
+    //  UPLOAD 
+    uploadBtn.addEventListener("click", async () => {
 
-    //upload files
-    uploadBtn.addEventListener('click', async ()=>{
-        if(files.length === 0) return
-        
-        const formData = new FormData()
+        console.log("Files", files);
+
+        const id = uploadBtn.dataset.id
+        const title = uploadBtn.dataset.title
+
+        console.log("Uploading to ID:", id);
+        console.log("uploding this title", title)
+
+        if (!currentId) {
+            alert("Upload ID missing!");
+            return;
+        }
+
+        console.log("Files length", files, files.length);
+
+        if (files.length === 0) return;
+
+        const formData = new FormData();
         console.log(formData);
-        
-        files.forEach(file => formData.append('images', file))
 
-        progressContainer.classList.remove("hidden")
+        files.forEach(file => formData.append("images", file));
 
-        try{
-            const res = await fetch("/admin/upload-Image", {
-                method : 'POST',
-                body : formData
-            })
+        console.log('Formdata', formData);
+
+        try {
+            const res = await fetch(`/admin/upload-image/${id}`, {
+                method: "POST",
+                body: formData
+            });
 
             const data = await res.json()
+            if (!res.ok) throw new Error(data.err || "Upload failed");
 
-            if(!res.ok) {
-                throw new error(data.error || "Upload Failed")
+            alert("Upload Successful 🚀");
+
+            closeModal();
+            location.reload();
+
+        } catch (err) {
+            console.error(err);
+            alert(err.message || "Error Uploding Files.");
+        }
+    });
+
+
+    //delete Image
+    document.querySelectorAll(".delete-image-btn").forEach(btn => {
+        btn.addEventListener("click", async () => {
+
+            const id = btn.dataset.id
+            const imageUrl = btn.dataset.img
+
+            console.log(imageUrl);
+
+
+            //confirmation msg
+            const confirmDelete = confirm("Are you Sure You want to Delete this Image?")
+
+            if (!confirmDelete) return
+
+            try {
+                const res = await fetch(`/admin/delete-image/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "content-type": "application/json"
+                    },
+                    body: JSON.stringify({ imageUrl })
+                });
+
+                const data = await res.json()
+
+                if (!res.ok) throw new Error(data.message)
+                else {
+
+                    //remove form UI
+                    // e.target.parentElement.remove()
+
+                    alert("Deleted Successfully.")
+
+                    setTimeout(() => {
+                        location.reload()
+                    }, 500)
+                }
+            } catch (err) {
+                console.log(err);
+                alert("Delete Failed")
             }
 
-            alert("upload Successful!")
 
-            files = []
-            renderFiles()
-        }catch (err){
-            alert(err.message || "error Uploding Files")
-        }
+        })
     })
 
 
-})
+
+
+
+});

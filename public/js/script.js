@@ -111,8 +111,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // reload after 2 sec if successfully submit
             setTimeout(() => {
-                    location.reload()
-                }, 2000)
+                location.reload()
+            }, 2000)
 
         } catch (err) {
             console.log(err);
@@ -168,12 +168,12 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 // Admin-login page AJAX method
-document.addEventListener("DOMContentLoaded", ()=>{
+document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".admin-login-form").addEventListener("submit", async function (e) {
         e.preventDefault()
 
         const admin_login_form = {
-            email : this.email.value,
+            email: this.email.value,
             password: this.password.value
         }
 
@@ -194,20 +194,20 @@ document.addEventListener("DOMContentLoaded", ()=>{
             const message = document.querySelector(".admin-login-message")
 
             message.innerHTML = data.message
-            if(data.type === "success"){
+            if (data.type === "success") {
                 message.style.color = "green"
 
                 // after 1sec redirect to dashboard page
-                setTimeout(()=>{
+                setTimeout(() => {
                     window.location.href = "/admin/dashboard"
                 }, 1000)
-            }else {
+            } else {
                 message.style.color = "red"
             }
             // message.style.color = data.type === "success" ? "green" : "red"
         } catch (err) {
             console.log(err);
-            
+
         }
     })
 
@@ -288,16 +288,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
             const data = await res.json();
 
-        
-                message.innerText = data.message;
-                message.style.color = data.type === "success" ? "green" : "red";
+
+            message.innerText = data.message;
+            message.style.color = data.type === "success" ? "green" : "red";
 
 
         } catch (err) {
             console.log("Error:", err);
         }
     });
-    form.addEventListener("input",()=>{
+    form.addEventListener("input", () => {
         if (message) message.innerHTML = ""
     })
 

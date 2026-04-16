@@ -1,21 +1,43 @@
 const { PortfolioQuery } = require("../models/portfolioModel")
 
-const generateFileUrl = (files) =>{
- return files.map(file =>{
-    return `${process.env.CLOUDFRONT_URL}/${file.key}`
- })
+const generateFileUrl = (files) => {
+    return files.map(file => {
+        return `https://${process.env.CLOUDFRONT_URL}/${file.key}`
+    })
 }
 
 //save files as json
-const saveFilesAsjson = async (files) =>{
+const saveFilesAsjson = async (id, files) => {
+
+    console.log("Files before maping to cloudfront url:", id, files);
+
+    const fileUrls = generateFileUrl(files)
+
+    console.log("File urls", fileUrls);
+
+    await PortfolioQuery.findOne({ where: { id : id }}).then(( async data => {
+
+        console.log("Data", data, data.title);
+        var portfolio = data;
         
-        const fileUrls = generateFileUrl(files) 
+        console.log("portfolio",portfolio);
 
-        const savedinDB = await PortfolioQuery.create({
-            files : fileUrls
-        })
+        let newFileUrls = [];
+        
+        if(portfolio && portfolio.images && portfolio.images.length) {
+            newFileUrls = portfolio.images;
+            fileUrls.forEach(url => newFileUrls.push(url));
+        } else {
+            newFileUrls = fileUrls;
+        }
 
-        return savedinDB    
+        let inserted = await PortfolioQuery.update(
+            { images: newFileUrls },
+            { where: { id: id } }   
+        )
+
+        return inserted;
+    }))
 }
 
-module.exports = {saveFilesAsjson}
+module.exports = { saveFilesAsjson }

@@ -9,7 +9,7 @@ const createAuthToken = (admin) => {
     return jwt.sign({
         id: admin.id,
         role: admin.role
-    }, JWT_SECRET_KEY, { expiresIn: "20m"})
+    }, JWT_SECRET_KEY, { expiresIn: "1d"})
 }
 
 

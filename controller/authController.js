@@ -104,48 +104,5 @@ const loginAdmin = async (req, res) => {
 
 }
 
-//admin login controller
-const loginAdmin2 = async (req, res) => {
-    const { email, password } = req.body
-
-    console.log(req.body);
-
-
-    //check email is already 
-    const admin = await UserQuery.findOne({ where: { email } })
-    if (!admin) {
-        return res.status(400).json({
-            message: "Admin not Found!",
-            type: 'error'
-        })
-    }
-
-    //compare admin input password and database password
-    const isMatch = await bcrypt.compare(password, admin.password)
-    if (!isMatch) {
-        return res.status(400).json({
-            message: "Invalid Password",
-            type: 'error'
-        })
-    }
-
-    //check is Admin or not
-    if (admin.role !== 'admin') {
-        return res.status(400).json({
-            message: 'Access denied',
-            type: 'error'
-        })
-    }
-
-    // if admin cureent credentials
-    const token = createAuthToken
-    return res.json({
-        message: 'Welcome Admin Dashboard',
-        type: 'success',
-        token
-    })
-
-}
-
 
 module.exports = { submitSignupForm, loginAdmin }

@@ -83,7 +83,7 @@ tr:hover {
 /* IMAGE BOX */
 .image-box {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     flex-wrap: wrap;
 }
 
@@ -99,6 +99,14 @@ tr:hover {
     position: relative;
     display: inline-block;
     margin: 5px;
+}
+
+.more-text {
+    /* margin-left: 8px; */
+    display: flex;
+    align-items: flex-end;
+    color: #888;
+    font-size: 12px;
 }
 
 
@@ -141,11 +149,18 @@ tr:hover {
     cursor: pointer;
     transition: 0.2s;
     color: white;
+    margin-top: 15px;
 }
 
 
 .upload-btn:hover {
     background: #00a87a;
+}
+
+.upload-message{
+    padding: 10px;
+    font-size: 20px;
+    margin-top: 10px;
 }
 
 /* DROP ZONE */
@@ -184,6 +199,17 @@ tr:hover {
     padding: 10px 15px;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.add-title-container{
+    display: flex;
+}
+
+.title-message{
+    align-content: space-around;
+    margin-left: 10px;
+    padding: 10px;
+    font-size: 17px;
 }
 
 

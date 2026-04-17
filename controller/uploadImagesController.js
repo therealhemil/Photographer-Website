@@ -7,7 +7,7 @@ const addTitle = async (req, res) => {
     const { title } = req.body
 
     //check title
-    console.log(title);
+    // console.log(title);
 
     try {
 
@@ -17,7 +17,7 @@ const addTitle = async (req, res) => {
             res.json({ message: "Title is Already in List.", type: "error" })
         } else {
             await PortfolioQuery.create({ title })
-            res.status(200).json({ message: "Add Title Succesfully", type: "sucess" })
+            res.status(200).json({ message: "Add Title Succesfully", type: "success" })
         }
 
 
@@ -47,7 +47,7 @@ const uploadImages = async (req, res) => {
     try {
         const id = req.params.id;
         if (!id) {
-            res.status(404).json({ message: "invalid request" });
+            res.status(404).json({ message: "Invalid Request", type: "error" });
         }
 
         const files = req.files
@@ -55,15 +55,15 @@ const uploadImages = async (req, res) => {
         console.log(files);
 
         if (!files[0]) {
-            return res.status(400).json({ message: "No files Uploaded" })
+            return res.status(400).json({ message: "No files Uploaded", type: "error" })
         }
 
         const uploadingFiles = await saveFilesAsjson(id, files)
 
-        res.status(200).json({ message: "Files uploaded Successfully", files: uploadingFiles })
+        res.status(200).json({ message: "Files uploaded Successfully", files: uploadingFiles, type: "success" })
     } catch (err) {
         console.log("Uploading Controller Error:", err);
-        return res.status(500).json({ err: "Error Uploading Error" })
+        return res.status(500).json({ messsge: "Error Uploading Error", type: 'error' })
 
     }
 }
@@ -87,7 +87,7 @@ const deleteImages = async (req, res) => {
 
         console.log("Image Data fetch for server:", images);
         console.log("Image Data type:", typeof images);
-        
+
 
         // remove image
         images = images.filter(i => {

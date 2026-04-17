@@ -2,28 +2,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
     //  ADD TITLE 
     document.querySelector(".add-title").addEventListener("submit", async (e) => {
-
+        
         e.preventDefault();
-
+        
         const title = e.target.title.value;
-
+        
         try {
             const res = await fetch("/admin/upload-image/newTitle", {
                 method: 'POST',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ title })
             });
-
+            
             if (!res.ok) throw new Error("Adding Title Error");
-
+            
             const data = await res.json()
-            if (data.type === "success") {
-                alert("Title Added Successfully");
-            }
-            else {
-                alert(data.message)
-            }
+            
+            //message show when title add
+            const title_message = document.querySelector(".title-message")
 
+        
+                title_message.innerHTML = data.message
+                title_message.style.color = data.type === "success" ? "green" : "red"
+                // alert("Title Added Successfully");
+        
             setTimeout(() => location.reload(), 800);
 
         } catch (err) {
@@ -134,6 +136,8 @@ document.addEventListener("DOMContentLoaded", () => {
     //  RENDER FILE LIST 
     function renderFiles() {
         fileList.innerHTML = "";
+        
+        const maxFilesShow = 5
 
         files.forEach((file, index) => {
             const div = document.createElement("div");
@@ -146,6 +150,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
             fileList.appendChild(div);
         });
+
+        // show more then files in ...
+        if(files.length > maxFilesShow){
+            const moreDiv = document.createElement("div")
+            moreDiv.className = 'file-item more-files'
+            moreDiv.innerHTML = `+${files.length - maxFilesShow} more...`
+            fileList.appendChild(moreDiv)
+        }
 
         uploadBtn.disabled = files.length === 0;
     }
@@ -168,24 +180,24 @@ document.addEventListener("DOMContentLoaded", () => {
         const id = uploadBtn.dataset.id
         const title = uploadBtn.dataset.title
 
-        console.log("Uploading to ID:", id);
-        console.log("uploding this title", title)
+        // console.log("Uploading to ID:", id);
+        // console.log("uploding this title", title)
 
         if (!currentId) {
             alert("Upload ID missing!");
             return;
         }
 
-        console.log("Files length", files, files.length);
+        // console.log("Files length", files, files.length);
 
         if (files.length === 0) return;
 
         const formData = new FormData();
-        console.log(formData);
+        // console.log(formData);
 
         files.forEach(file => formData.append("images", file));
 
-        console.log('Formdata', formData);
+        // console.log('Formdata', formData);
 
         try {
             const res = await fetch(`/admin/upload-image/${id}`, {
@@ -194,12 +206,21 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             const data = await res.json()
-            if (!res.ok) throw new Error(data.err || "Upload failed");
+            if (!res.ok) throw new Error(data.err || "Server Error Upload failed");
+            else{   
+                const upload_message = document.querySelector(".upload-message")
+                
+                upload_message.innerHTML = data.message
+                upload_message.style.color = data.type === "success" ? "green" : "red"
+                
+                setTimeout(()=>{
+                    closeModal();
+                    location.reload();
 
-            alert("Upload Successful 🚀");
-
-            closeModal();
-            location.reload();
+                },1000)
+                // alert("Upload Successful 🚀");
+                
+            }
 
         } catch (err) {
             console.error(err);

@@ -44,18 +44,25 @@
                                     <td>
                                         <div class="image-box">
                                             <% if(p.images && p.images.length){ %>
-                                                <% p.images.forEach(img=> { %>
+
+                                                <% const maxVisible = 5 %>
+                                                <% p.images.slice(0,maxVisible).forEach(img=> { %>
                                                     <div class="img-wrapper">
                                                         <img src="<%= img %>">
 
                                                         <!-- delete button each image -->
-                                                        <button type="button" class="delete-image-btn" data-id="<%= p.id %>"
-                                                            data-img="<%= img %>">X</button>
+                                                        <button type="button" class="delete-image-btn"
+                                                            data-id="<%= p.id %>" data-img="<%= img %>">X</button>
                                                     </div>
                                                     <% }) %>
-                                                        <% } else { %>
-                                                            <span>No images</span>
+
+                                                        <% if (p.images.length > maxVisible) { %>
+                                                            <span class="more-text">more...</span>
                                                             <% } %>
+
+                                                                <% } else { %>
+                                                                    <span>No images</span>
+                                                                    <% } %>
                                         </div>
                                     </td>
 
@@ -103,6 +110,8 @@
                                                         <!-- CLOSE -->
                                                         <button type="button" class="close-btn">✖</button>
 
+                                                        <div class="upload-message"></div>
+
                                                     </div>
 
                                                 </div>
@@ -120,10 +129,14 @@
                     </table>
 
                     <!-- ADD TITLE -->
-                    <form class="add-title">
-                        <input type="text" name="title" placeholder="New Title Add" required>
-                        <button type="submit">Add Title</button>
-                    </form>
+                    <div class="add-title-container">
+
+                        <form class="add-title">
+                            <input type="text" name="title" placeholder="New Title Add" required>
+                            <button type="submit">Add Title</button>
+                        </form>
+                        <div class="title-message"></div>
+                    </div>
                 </div>
             </div>
 

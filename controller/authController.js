@@ -52,7 +52,7 @@ const submitSignupForm = async (req, res) => {
 //admin login controller
 const loginAdmin = async (req, res) => {
     const { email, password } = req.body
-    console.log(req.body);
+    // console.log(req.body);
 
     try {
 

@@ -33,7 +33,7 @@ const submitSignupForm = async (req, res) => {
 
         //create new user entry
         await UserQuery.create({ first_name, last_name, email, password: hashpassword, gender })
-        return res.json({
+        return res.status(200).json({
             message: `${first_name}, Successfully Signup`,
             type: 'success'
         })

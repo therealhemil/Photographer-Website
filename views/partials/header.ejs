@@ -17,10 +17,21 @@
                     <a href="/portfolio" class="dropbtn">Portfolio</a>
                     <!-- Dropdown Menu bar -->
                     <div class="dropdown-content">
-                        <a href="/portfolio_event_images">Event Images</a>
-                        <a href="/portfolio_wedding_images">Wedding Images</a>
-                        <a href="/portfolio_animal_images">Animal Images</a>
-                        <a href="/portfolio_corporate_events">Corporate Events</a>
+                        <!-- dynamically drop-down menu -->
+                        <% if (portfolios && portfolios.length> 0) { %>
+                            <% portfolios.forEach(p=> { %>
+                                <a href="/portfolio/<%= p.id %>">
+                                    <%= p.title %>
+                                </a>
+                                <% }) %>
+                                    <% } else { %>
+                                        <span class="no-data">No Categories</span>
+                                        <% } %>
+
+                                            <!-- <a href="/portfolio_event_images">Event Images</a>
+                                            <a href="/portfolio_wedding_images">Wedding Images</a>
+                                            <a href="/portfolio_animal_images">Animal Images</a>
+                                            <a href="/portfolio_corporate_events">Corporate Events</a> -->
                     </div>
                 </li>
                 <li class="item"><a href="/Contact_us">Contact Us</a></li>

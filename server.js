@@ -1,6 +1,7 @@
 // .env file config
 require('dotenv').config({path: './.env'})
 
+
 //express
 const express = require('express');
 const app = express();
@@ -9,7 +10,6 @@ const uploadRouter = require('./uploadImage')
 
 // cookie-parser to set token in cookie as a moddileware
 const cookieParser = require('cookie-parser')
-
 
 // use morgan for logging
 // const morgan = require("morgan")
@@ -30,7 +30,9 @@ app.use(express.static("public"))
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
-
+//middleware for portfolioTitle
+const globalportfolioTitle = require("./middleware/headerMiddleware")
+app.use(globalportfolioTitle)
 
 // view engine set
 app.set("view engine", "ejs")
@@ -48,14 +50,13 @@ const pageRoute = require("./routes/pageRoute")
 const enagagementController = require("./routes/engagementRoute") 
 
 // admin_dashboard route call
-const admin_dashboard = require('./routes/adminRoute')
+const admin_dashboard = require('./routes/adminRoute');
 //signup_form call
 // const userController = require("./routes/engagementRoute")
 
 
 //route pages
 app.use("/", pageRoute)
-app.use("/", enagagementController)
 app.use("/", enagagementController)
 app.use("/", admin_dashboard)
 

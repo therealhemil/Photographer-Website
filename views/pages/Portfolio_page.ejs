@@ -14,107 +14,66 @@
 <body>
 
     <!-- Header Here-->
-     <%- include("../partials/header") %>
+    <%- include("../partials/header") %>
 
+        <section>
+            <h1 class="fade-in portfolio-name">Portfolio</h1>
 
-    <section>
-        <h1 class="fade-in portfolio-name">Portfolio</h1>
+            <% portfolios.forEach(p=> { %>
+                <div class="portfolio-container">
+                    <h1>
+                        <%= p.title %>:
+                    </h1>
 
-        <!-- Event Images -->
-        <div class="event-container portfolio-container">
-            <h1>Event Images:</h1>
-            <div class="event-box landscape">
-                <div class="grid">
-                    <div class="img-box"><img src="/images/Portfolio images/Event Images/1.jpg" loading="lazy"></div>
-                    <div class="img-box"><img src="/images/Portfolio images/Event Images/2.jpg" loading="lazy"></div>
-                    <div class="img-box"><img src="/images/Portfolio images/Event Images/3.jpg" loading="lazy"></div>
-                    <div class="img-box"><img src="/images/Portfolio images/Event Images/4.jpg" loading="lazy"></div>
-                </div>
-            </div>
-            <div class="explore-more">
-                <a href="/portfolio_event_images" class="btn">Explore Images</a>
-            </div>
-        </div>
+                    <div class="landscape">
+                        <div class="grid">
 
-        <!-- Wedding Images -->
-        <div class="wedding-container portfolio-container">
-            <h1>Wedding Images:</h1>
-            <div class="wedding-box landscape">
-                <div class="grid">
-                    <div class="img-box"><img src="/images/Portfolio images/Wedding Images/1.jpg" loading="lazy">
-                    </div>
-                    <div class="img-box"><img src="/images/Portfolio images/Wedding Images/2.jpg" loading="lazy">
-                    </div>
-                    <div class="img-box"><img src="/images/Portfolio images/Wedding Images/3.jpg" loading="lazy">
-                    </div>
-                    <div class="img-box"><img src="/images/Portfolio images/Wedding Images/4.jpg" loading="lazy">
+                            <% if (p.images && p.images.length> 0) { %>
+
+                                <% p.images.slice(0, 4).forEach(img=> { %>
+                                    <div class="img-box">
+                                        <img src="<%= img %>" loading="lazy">
+                                    </div>
+                                    <% })%>
+
+                                        <% } else { %>
+
+                                            <!-- NO IMAGE CASE -->
+                                            <div class="no-image">
+                                                <p>No Images Available</p>
+                                            </div>
+
+                                            <% } %>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="explore-more">
-                <a href="/portfolio_wedding_images" class="btn">Explore Images</a>
-            </div>
-        </div>
 
-
-        <!-- Animal Images -->
-        <div class="animal-container portfolio-container">
-            <h1>Animal Images:</h1>
-            <div class="animal-box landscape">
-                <div class="grid">
-                    <div class="img-box"><img src="images/Portfolio images/Animal Images/1.jpg" loading="lazy"></div>
-                    <div class="img-box"><img src="/images/Portfolio images/Animal Images/2.jpg" loading="lazy"></div>
-                    <div class="img-box"><img src="/images/Portfolio images/Animal Images/3.jpg" loading="lazy"></div>
-                    <div class="img-box"><img src="/images/Portfolio images/Animal Images/4.jpg" loading="lazy"></div>
+                <div class="explore-more">
+                    <a href="/portfolio/<%= p.id %>" class="btn">Explore Images</a>
                 </div>
-            </div>
-            <div class="explore-more">
-                <a href="/portfolio_animal_images" class="btn">Explore Images</a>
-            </div>
+                </div>
+                <% }) %>
+
+        </section>
+
+        <!-- Full screen image-->
+        <div id="lightbox">
+            <span id="closeBtn">&times;</span>
+            <img id="lightbox-img">
         </div>
 
 
-        <!-- Corporate Events -->
-        <div class="corporate-event-container portfolio-container">
-            <h1>Corporate Events:</h1>
-            <div class="corporate-event-box landscape">
-                <div class="grid">
-                    <div class="img-box"><img src="/images/Portfolio images/Corporate events/1.jpg" loading="lazy">
-                    </div>
-                    <div class="img-box"><img src="/images/Portfolio images/Corporate events/2.jpg" loading="lazy">
-                    </div>
-                    <div class="img-box"><img src="/images/Portfolio images/Corporate events/3.jpg" loading="lazy">
-                    </div>
-                    <div class="img-box"><img src="/images/Portfolio images/Corporate events/4.jpg" loading="lazy">
-                    </div>
-                </div>
-            </div>
-            <div class="explore-more">
-                <a href="/portfolio_corporate_events" class="btn">Explore Images</a>
-            </div>
-        </div>
-
-
-    </section>
-
-    <!-- Full screen image-->
-    <div id="lightbox">
-        <span id="closeBtn">&times;</span>
-        <img id="lightbox-img">
-    </div>
-
-
-    <!-- 
+        <!-- 
     <section class="portfolio">
         <h1 class="fade-in portfolio-name">Portfolio</h1>
         <div class="landscape"> -->
-    <!-- <div class="grid"> -->
-    <!-- <div class="img-box"><img src="../images/banner images/3.jpg" loading="lazy"></div>
+        <!-- <div class="grid"> -->
+        <!-- <div class="img-box"><img src="../images/banner images/3.jpg" loading="lazy"></div>
             <div class="img-box"><img src="../images/banner images/9.jpg" loading="lazy"></div>
             <div class="img-box"><img src="../images/banner images/6.jpg" loading="lazy"></div>
             <div class="img-box"><img src="../images/banner images/7.jpg" loading="lazy"></div> -->
-    <!-- </div> -->
-    <!-- <div class="img-box"><img src="../images/banner images/5.jpg" loading="lazy"></div>
+        <!-- </div> -->
+        <!-- <div class="img-box"><img src="../images/banner images/5.jpg" loading="lazy"></div>
             <div class="img-box"><img src="../images/banner images/4.jpg" loading="lazy"></div>
             <div class="img-box"><img src="../images/banner images/8.jpg" loading="lazy"></div>
             <div class="img-box"><img src="../images/banner images/1.jpg" loading="lazy"></div>
@@ -128,8 +87,8 @@
     </section> -->
 
 
-    <!-- footer here-->
-     <%- include("../partials/footer")%>
+        <!-- footer here-->
+        <%- include("../partials/footer")%>
 
 
 

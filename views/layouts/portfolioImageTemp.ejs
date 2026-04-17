@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio of <%= portfolio.title %>
+    </title>
+    <!-- css file -->
+    <link rel="stylesheet" href="/css/style.css">
+    <!-- Responsive css -->
+    <link rel="stylesheet" media="screen and (max-width:1100px)" href="/css/reponsive-style.css">
+    <!-- javascript file -->
+    <script src="/js/script.js"></script>
+
+</head>
+
+<body>
+
+    <!-- Header Here-->
+    <%- include("./header") %>
+
+    <!-- image section -->
+    <section class="event-section">
+        <h1 class="fade-in portfolio-name">
+            <%= portfolio.title %>
+        </h1>
+
+        <% if (portfolio.images && portfolio.images.length> 0) { %>
+
+            <div class="landscape">
+                <div class="grid">
+                    <% portfolio.images.forEach(img=> { %>
+                        <div class="img-box">
+                            <img src="<%= img %>">
+                        </div>
+                        <% }) %>
+                </div>
+
+                <% } else { %>
+
+                    <div class="no-images empty_page">
+                        <h3>No Images Available</h3>
+                    </div>
+
+                    <% } %>
+            </div>
+    </section>
+    <!-- Full screen image-->
+    <div id="lightbox">
+        <span id="closeBtn">&times;</span>
+        <img id="lightbox-img">
+    </div>
+
+</body>
+
+</html>

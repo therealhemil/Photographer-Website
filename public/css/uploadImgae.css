@@ -83,7 +83,7 @@ tr:hover {
 /* IMAGE BOX */
 .image-box {
     display: flex;
-    gap: 10px;
+    gap: 9px;
     flex-wrap: wrap;
 }
 

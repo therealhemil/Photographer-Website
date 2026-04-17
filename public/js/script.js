@@ -85,14 +85,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 //contact-me form
 document.addEventListener("DOMContentLoaded", () => {
-    document.querySelector(".contact-me-form").addEventListener("submit", async function (e) {
+    const contact_me_button = document.querySelector(".contact-me-button")
+    contact_me_button.addEventListener("click", async (e) => {
         e.preventDefault()
 
+        // const formData = {
+        //     name: this.name.value,
+        //     email: this.email.value,
+        //     phone: this.phone.value,
+        //     msg: this.msg.value
+        // }
+
         const formData = {
-            name: this.name.value,
-            email: this.email.value,
-            phone: this.phone.value,
-            msg: this.msg.value
+            name: e.target.name.value,
+            email: e.target.email.value,
+            phone: e.target.phone.value,
+            msg: e.target.msg.value
         }
 
         try {
@@ -290,7 +298,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             message.innerText = data.message;
-            message.style.color = data.type === "success" ? "green" : "red";
+            if (data.type === "success") {
+                message.style.color = "green"
+
+                // after 1sec redirect to login page
+                setTimeout(() => {
+                    window.location.href = "/login"
+                }, 1000)
+            } else {
+                message.style.color = "red"
+            }
+            // message.style.color = data.type === "success" ? "green" : "red";
 
 
         } catch (err) {

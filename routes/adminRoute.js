@@ -29,8 +29,12 @@ router.get("/admin/uploadImage", verifyAdmin, getPortFolio)
 //add title in database
 router.post("/admin/upload-image/newTitle", verifyAdmin, addTitle)
 //add images in table
-router.post("/admin/upload-image/:id",verifyAdmin, upload.array("images", 12), uploadImages)
+router.post("/admin/upload-image/:id",verifyAdmin, upload.array("images", 5), uploadImages)
 //delete images in table
 router.delete("/admin/delete-image/:id", verifyAdmin, deleteImages)
+
+//chat-section route
+router.get("/admin/chat-section", verifyAdmin,pageController.renderChat_section)
+
 
 module.exports = router

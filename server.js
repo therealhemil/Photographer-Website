@@ -1,5 +1,5 @@
 // .env file config
-require('dotenv').config({path: './.env'})
+require('dotenv').config({ path: './.env' })
 
 
 //express
@@ -16,9 +16,9 @@ const cookieParser = require('cookie-parser')
 // app.use(morgan('dev'))
 
 // mysql2
-const {db} = require('./config/database')
+const { db } = require('./config/database')
 //check if database sync or not
-db.sync().then(()=>{
+db.sync().then(() => {
     console.log("Database is Synced");
 }).catch(err => {
     console.log("Error Database Syncing", err.message);
@@ -38,8 +38,8 @@ app.use(globalportfolioTitle)
 app.set("view engine", "ejs")
 app.set("views", [
     path.join(__dirname, "views"),
-    path.join(__dirname, "views","partials"),
-    path.join(__dirname, "views","layouts")
+    path.join(__dirname, "views", "partials"),
+    path.join(__dirname, "views", "layouts")
 ])
 
 
@@ -47,7 +47,7 @@ app.set("views", [
 const pageRoute = require("./routes/pageRoute")
 
 //contact_form & Subscribe_email_form & signup_form route call
-const enagagementController = require("./routes/engagementRoute") 
+const enagagementController = require("./routes/engagementRoute")
 
 // admin_dashboard route call
 const admin_dashboard = require('./routes/adminRoute');

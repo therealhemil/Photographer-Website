@@ -57,5 +57,6 @@ module.exports = {
     // renderInquiryTable : renderView("Inquiry_Table")
     // renderUploadImages : renderView("uploadImages")
     DynamicallygetPortFolioImages,
-    getportfolioExploreImages
+    getportfolioExploreImages,
+    renderChat_section : renderView("layouts/admin_chat_section")
 }   

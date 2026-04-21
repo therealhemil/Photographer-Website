@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Chat | Sam's Photography</title>
+        <link rel="stylesheet" href="/css/admin_chat.css">
+        <script type="module" src="/js/admin_chat_widget.js"></script>
+</head>
+
+<body>
+    <div class="layout">
+        <%- include("../partials/adminDashboard_sidebar") %>
+
+        <main class="chat-admin-shell">
+            <section class="chat-admin-hero">
+                <div>
+                    <p class="eyebrow">Realtime Chat Inbox</p>
+                    <h1>Manage website conversations in one place.</h1>
+                    <p>See new visitor messages, online status, typing indicators, and send replies without leaving the dashboard.</p>
+                </div>
+                <div class="hero-pill" id="adminPresencePill">Connecting...</div>
+            </section>
+
+            <section class="chat-admin-layout">
+                <aside class="chat-admin-sidebar">
+                    <div class="chat-admin-sidebar-head">
+                        <div>
+                            <h2>Conversations</h2>
+                            <p id="conversationCount">0 active chats</p>
+                        </div>
+                    </div>
+                    <div class="chat-conversation-list" id="chatConversationList"></div>
+                </aside>
+
+                <section class="chat-admin-panel">
+                    <div class="chat-admin-panel-head" id="chatAdminPanelHead">
+                        <div>
+                            <h2>Select a conversation</h2>
+                            <p>Choose a visitor from the left to start replying.</p>
+                        </div>
+                    </div>
+
+                    <div class="chat-admin-messages" id="chatAdminMessages">
+                        <div class="chat-admin-empty">
+                            <strong>No conversation selected</strong>
+                            <p>New messages from your website visitors will appear here.</p>
+                        </div>
+                    </div>
+
+                    <div class="chat-admin-typing" id="chatAdminTyping" hidden>Visitor is typing...</div>
+
+                    <form class="chat-admin-compose" id="chatAdminCompose">
+                        <textarea id="chatAdminInput" rows="3" maxlength="1000" placeholder="Reply to the visitor..." required disabled></textarea>
+                        <button type="submit" disabled id="chatAdminSendButton">Send Reply</button>
+                    </form>
+
+                    <p class="chat-admin-feedback" id="chatAdminFeedback"></p>
+                </section>
+            </section>
+        </main>
+    </div>
+
+    <!-- <script src="/js/admin_sidebar.js"></script> -->
+</body>
+
+</html>

@@ -1,0 +1,56 @@
+<link rel="stylesheet" href="/css/chat_widget.css">
+<script type="module" src="/js/chat_widget.js"></script>
+
+<div class="chat-widget" id="chatWidget">
+    <button class="chat-launcher" id="chatLauncher" type="button" aria-label="Open website chat">
+        <span class="chat-launcher-icon">💬</span>
+        <span class="chat-launcher-ping" id="chatLauncherPing" hidden></span>
+    </button>
+
+    <section class="chat-panel" id="chatPanel" aria-hidden="true">
+        <div class="chat-panel-header">
+            <div>
+                <p class="chat-kicker">Live Support</p>
+                <h3>Message Sam's Photography</h3>
+                <!-- <p class="chat-status-line">
+                    <span class="chat-status-dot" id="chatAdminDot"></span>
+                    <span id="chatAdminStatus">Checking admin status...</span>
+                </p> -->
+            </div>
+            <button class="chat-close" id="chatClose" type="button" aria-label="Close chat">&times;</button>
+        </div>
+
+        <div class="chat-note">
+            Drop a message here. The admin team can reply in real time, and your conversation stays here on this browser.
+        </div>
+
+        <section class="chat-step chat-step-details" id="chatDetailsStep">
+            <div class="chat-step-copy">
+                <strong>Enter your details first</strong>
+                <!-- <p>Admin needs your name and one contact method before the chat opens.</p> -->
+            </div>
+
+            <form class="chat-identity-form" id="chatIdentityForm">
+                <input type="text" id="chatGuestName" placeholder="Your name" required>
+                <input type="email" id="chatGuestEmail" placeholder="Your email">
+                <input type="tel" id="chatGuestPhone" placeholder="Your phone number">
+                <button type="button" class="chat-start-button" id="chatStartButton">Continue To Chat</button>
+            </form>
+        </section>
+
+        <section class="chat-step chat-step-messages" id="chatMessagesStep" hidden>
+            <div class="chat-message-area" id="chatMessageArea">
+            
+            </div>
+
+            <div class="chat-typing" id="chatTypingIndicator" hidden>Admin is typing...</div>
+
+            <form class="chat-compose-form" id="chatComposeForm">
+                <textarea id="chatMessageInput" placeholder="Type your message here..." maxlength="1000" rows="1" required></textarea>
+                <button id="chatComposeFormButton" type="submit">➤</button>
+            </form>
+        </section>
+
+        <p class="chat-feedback" id="chatFeedback"></p>
+    </section>
+</div>

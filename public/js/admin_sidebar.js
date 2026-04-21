@@ -66,6 +66,13 @@ document.addEventListener('DOMContentLoaded', () => {
         window.location.href = "/admin/uploadImage"
     })
 
+    //get redirect into chat_section page:
+    document.getElementById("chatsection").addEventListener("click", async()=>{
+        await fetch("/admin/chat-section", {
+            method : "GET"
+        })
+        window.location.href = "/admin/chat-section"
+    })
 
 
 })
